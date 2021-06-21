@@ -21,6 +21,7 @@ public class Payment {
     private final String creditorIban;
     private final PaymentType type;
 
+    @Setter(AccessLevel.PACKAGE)
     PaymentStatus status = PaymentStatus.ACTIVE;
     @Setter(AccessLevel.PACKAGE)
     private String details;
