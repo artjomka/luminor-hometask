@@ -14,10 +14,10 @@ public class PaymentType1Creator implements PaymentCreator {
     @Override
     public CreatePaymentResponse createPayment(CreatePaymentRequest request) {
         validate(request);
-        var payment = Payment.of(request.amount(), request.currency(), request.debtorIban(), request.creditorIban(),request.paymentType());
+        var payment = Payment.of(request.amount(), request.currency(), request.debtorIban(), request.creditorIban(), request.paymentType());
         payment.setDetails(request.details());
-        paymentRepository.save(payment);
-        return new CreatePaymentResponse(payment.getId());
+        var savedPayment = paymentRepository.save(payment);
+        return new CreatePaymentResponse(savedPayment.getId());
     }
 
     private void validate(CreatePaymentRequest createPaymentRequest) {

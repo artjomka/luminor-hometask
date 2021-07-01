@@ -1,5 +1,6 @@
 package com.luminor.hometask.payment;
 
+import com.luminor.hometask.payment.dto.CancelPaymentRequest;
 import com.luminor.hometask.payment.dto.CreatePaymentRequest;
 import com.luminor.hometask.payment.dto.CreatePaymentResponse;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("payment")
+@RestController()
+@RequestMapping("/payment/")
 @RequiredArgsConstructor
 public class PaymentController {
 
@@ -25,9 +27,9 @@ public class PaymentController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/{paymentId}/cancellation")
-    public ResponseEntity cancel(@PathVariable Long paymentId){
-        paymentCancellationService.cancelPayment(paymentId);
+    @PutMapping("/cancel")
+    public ResponseEntity cancel(@RequestBody CancelPaymentRequest cancelPaymentRequest) {
+        paymentCancellationService.cancelPayment(cancelPaymentRequest.id());
         return ResponseEntity.ok().build();
     }
 }
